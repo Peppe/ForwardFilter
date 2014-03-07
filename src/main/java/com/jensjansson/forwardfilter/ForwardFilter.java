@@ -14,15 +14,8 @@ public class ForwardFilter implements Filter {
 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		final String contextPath = ((HttpServletRequest) request)
-				.getContextPath();
-		String path = ((HttpServletRequest) request).getRequestURI().substring(
-				contextPath.length());
-		System.out.println("requestURI: " + ((HttpServletRequest) request).getRequestURI());
-		if (path.toLowerCase().contains("page.html")) {
-			System.out
-					.println("page.html was requested. We should serve that page.");
-			chain.doFilter(request, response);
+		if (((HttpServletRequest) request).getRequestURI().contains("/page.html")) {
+			System.out.println("page.html was requested. We should serve that page.");
 		}
 		chain.doFilter(request, response);
 	}
